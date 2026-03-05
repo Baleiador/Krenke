@@ -171,19 +171,19 @@ export default function App() {
             </div>
             
             <div className="relative">
-              <div className="aspect-square rounded-[3rem] overflow-hidden bg-slate-100 relative shadow-2xl border-8 border-white">
-                {/* INSTRUÇÃO: Substitua o src abaixo pelo caminho da sua imagem de fábrica/equipe */}
-                <img 
-                  src="https://picsum.photos/seed/factory/800/800" 
-                  alt="Nossa fábrica" 
-                  className="w-full h-full object-cover"
-                  referrerPolicy="no-referrer"
-                />
+              <div className="aspect-[4/5] rounded-[3rem] overflow-hidden bg-slate-100 relative shadow-2xl border-8 border-white flex items-center justify-center">
+                <iframe 
+                  src="https://www.instagram.com/reel/DIey_0npyIk/embed" 
+                  className="absolute inset-0 w-full h-full border-0"
+                  scrolling="no"
+                  allowTransparency={true}
+                  allow="encrypted-media"
+                ></iframe>
                 <div className="absolute inset-0 border-4 border-[var(--color-brand-blue)]/20 rounded-[2.5rem] pointer-events-none"></div>
               </div>
               
               {/* Floating badge */}
-              <div className="absolute -bottom-8 -left-8 bg-white p-6 rounded-3xl shadow-2xl border-2 border-[var(--color-brand-pink)]/20 transform -rotate-3">
+              <div className="absolute -bottom-8 -left-8 bg-white p-6 rounded-3xl shadow-2xl border-2 border-[var(--color-brand-pink)]/20 transform -rotate-3 z-10">
                 <div className="flex items-center gap-4">
                   <div className="text-5xl font-black text-[var(--color-brand-pink)]">+10</div>
                   <div className="text-base font-bold text-slate-700 leading-tight">Anos de<br/>Experiência</div>
@@ -212,7 +212,6 @@ export default function App() {
                 alt="Playground ao Ar Livre" 
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 referrerPolicy="no-referrer"
-                onError={(e) => { e.currentTarget.src = "https://picsum.photos/seed/playground1/600/800"; }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-brand-darkblue)]/90 via-[var(--color-brand-darkblue)]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
                 <h3 className="text-white text-3xl font-black mb-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Playground ao Ar Livre</h3>
@@ -227,7 +226,6 @@ export default function App() {
                 alt="Estação Colorida" 
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 referrerPolicy="no-referrer"
-                onError={(e) => { e.currentTarget.src = "https://picsum.photos/seed/playground2/600/800"; }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-brand-purple)]/90 via-[var(--color-brand-purple)]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
                 <h3 className="text-white text-3xl font-black mb-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Estação Colorida</h3>
@@ -242,7 +240,6 @@ export default function App() {
                 alt="Circuito de Tubos" 
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 referrerPolicy="no-referrer"
-                onError={(e) => { e.currentTarget.src = "https://picsum.photos/seed/playground3/600/800"; }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-brand-orange)]/90 via-[var(--color-brand-orange)]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
                 <h3 className="text-white text-3xl font-black mb-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Circuito de Tubos</h3>
@@ -257,7 +254,6 @@ export default function App() {
                 alt="Área Kids Interna" 
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 referrerPolicy="no-referrer"
-                onError={(e) => { e.currentTarget.src = "https://picsum.photos/seed/playground4/600/800"; }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-brand-green)]/90 via-[var(--color-brand-green)]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
                 <h3 className="text-white text-3xl font-black mb-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Área Kids Interna</h3>
@@ -272,7 +268,6 @@ export default function App() {
                 alt="Parque Coberto" 
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 referrerPolicy="no-referrer"
-                onError={(e) => { e.currentTarget.src = "https://picsum.photos/seed/playground5/600/800"; }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-brand-blue)]/90 via-[var(--color-brand-blue)]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
                 <h3 className="text-white text-3xl font-black mb-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Parque Coberto</h3>
@@ -287,7 +282,6 @@ export default function App() {
                 alt="Domo de Escalada" 
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 referrerPolicy="no-referrer"
-                onError={(e) => { e.currentTarget.src = "https://picsum.photos/seed/playground6/600/800"; }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-brand-pink)]/90 via-[var(--color-brand-pink)]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
                 <h3 className="text-white text-3xl font-black mb-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Domo de Escalada</h3>
