@@ -6,7 +6,7 @@ export default function App() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const WHATSAPP_LINK = "https://api.whatsapp.com/send/?phone=5581998312244&text&type=phone_number&app_absent=0&utm_source=ig";
+  const WHATSAPP_LINK = "https://wa.me/5581998312244";
   const INSTAGRAM_LINK = "https://www.instagram.com/krenkenordeste?igsh=MXM0em45azJpdGFmNA%3D%3D";
 
   useEffect(() => {
@@ -176,7 +176,7 @@ export default function App() {
                   src="https://www.instagram.com/reel/DIey_0npyIk/embed" 
                   className="absolute inset-0 w-full h-full border-0"
                   scrolling="no"
-                  allowTransparency={true}
+                  allowtransparency="true"
                   allow="encrypted-media"
                 ></iframe>
                 <div className="absolute inset-0 border-4 border-[var(--color-brand-blue)]/20 rounded-[2.5rem] pointer-events-none"></div>
@@ -337,11 +337,8 @@ export default function App() {
                 <a href={INSTAGRAM_LINK} target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center hover:bg-[var(--color-brand-pink)] hover:text-white transition-all shadow-lg">
                   <Instagram className="w-6 h-6" />
                 </a>
-                <a href="#" className="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center hover:bg-[var(--color-brand-blue)] hover:text-white transition-all shadow-lg">
-                  <Facebook className="w-6 h-6" />
-                </a>
-                <a href="#" className="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center hover:bg-[var(--color-brand-darkblue)] hover:text-white transition-all shadow-lg">
-                  <Linkedin className="w-6 h-6" />
+                <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center hover:bg-[var(--color-brand-green)] hover:text-white transition-all shadow-lg">
+                  <MessageCircle className="w-6 h-6" />
                 </a>
               </div>
             </div>
