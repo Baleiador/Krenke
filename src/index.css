@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Nunito:wght@400;600;700;800;900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Nunito", ui-sans-serif, system-ui, sans-serif;
+  --font-handwriting: "Caveat", cursive;
+  
+  --color-brand-green: #00A651;
+  --color-brand-blue: #00AEEF;
+  --color-brand-darkblue: #2E3192;
+  --color-brand-orange: #F7941D;
+  --color-brand-purple: #662D91;
+  --color-brand-pink: #EC008C;
+}
+
+html {
+  scroll-behavior: smooth;
+}
