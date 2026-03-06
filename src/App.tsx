@@ -211,7 +211,6 @@ export default function App() {
                 src="/brinquedo-1.jpg" 
                 alt="Playground ao Ar Livre" 
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                referrerPolicy="no-referrer"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-brand-darkblue)]/90 via-[var(--color-brand-darkblue)]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
                 <h3 className="text-white text-3xl font-black mb-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Playground ao Ar Livre</h3>
@@ -225,7 +224,6 @@ export default function App() {
                 src="/brinquedo-2.jpg" 
                 alt="Estação Colorida" 
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                referrerPolicy="no-referrer"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-brand-purple)]/90 via-[var(--color-brand-purple)]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
                 <h3 className="text-white text-3xl font-black mb-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Estação Colorida</h3>
@@ -239,7 +237,6 @@ export default function App() {
                 src="/brinquedo-3.jpg" 
                 alt="Circuito de Tubos" 
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                referrerPolicy="no-referrer"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-brand-orange)]/90 via-[var(--color-brand-orange)]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
                 <h3 className="text-white text-3xl font-black mb-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Circuito de Tubos</h3>
@@ -253,7 +250,6 @@ export default function App() {
                 src="/brinquedo-4.jpg" 
                 alt="Área Kids Interna" 
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                referrerPolicy="no-referrer"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-brand-green)]/90 via-[var(--color-brand-green)]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
                 <h3 className="text-white text-3xl font-black mb-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Área Kids Interna</h3>
@@ -267,7 +263,6 @@ export default function App() {
                 src="/brinquedo-5.jpg" 
                 alt="Parque Coberto" 
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                referrerPolicy="no-referrer"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-brand-blue)]/90 via-[var(--color-brand-blue)]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
                 <h3 className="text-white text-3xl font-black mb-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Parque Coberto</h3>
@@ -281,7 +276,6 @@ export default function App() {
                 src="/brinquedo-6.jpg" 
                 alt="Domo de Escalada" 
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                referrerPolicy="no-referrer"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-brand-pink)]/90 via-[var(--color-brand-pink)]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
                 <h3 className="text-white text-3xl font-black mb-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Domo de Escalada</h3>
