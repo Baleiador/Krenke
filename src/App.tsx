@@ -208,7 +208,7 @@ export default function App() {
             {/* Gallery Item 1 */}
             <div className="group relative aspect-[4/5] rounded-3xl overflow-hidden bg-slate-200 cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-500 border-4 border-white">
               <img 
-                src="/brinquedo-1.jpg" 
+                src="https://i.postimg.cc/3J8vkPvq/brinquedo_1.jpg" 
                 alt="Playground ao Ar Livre" 
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
@@ -221,7 +221,7 @@ export default function App() {
             {/* Gallery Item 2 */}
             <div className="group relative aspect-[4/5] rounded-3xl overflow-hidden bg-slate-200 cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-500 lg:translate-y-8 border-4 border-white">
               <img 
-                src="/brinquedo-2.jpg" 
+                src="https://i.postimg.cc/DyxbLBrc/brinquedo_2.webp" 
                 alt="Estação Colorida" 
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
@@ -234,7 +234,7 @@ export default function App() {
             {/* Gallery Item 3 */}
             <div className="group relative aspect-[4/5] rounded-3xl overflow-hidden bg-slate-200 cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-500 border-4 border-white">
               <img 
-                src="/brinquedo-3.jpg" 
+                src="https://i.postimg.cc/sDjhMthN/brinquedo_3.jpg" 
                 alt="Circuito de Tubos" 
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
@@ -247,7 +247,7 @@ export default function App() {
             {/* Gallery Item 4 */}
             <div className="group relative aspect-[4/5] rounded-3xl overflow-hidden bg-slate-200 cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-500 border-4 border-white">
               <img 
-                src="/brinquedo-4.jpg" 
+                src="https://i.postimg.cc/nrPpcjmS/brinquedo_4.webp" 
                 alt="Área Kids Interna" 
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
@@ -260,7 +260,7 @@ export default function App() {
             {/* Gallery Item 5 */}
             <div className="group relative aspect-[4/5] rounded-3xl overflow-hidden bg-slate-200 cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-500 lg:translate-y-8 border-4 border-white">
               <img 
-                src="/brinquedo-5.jpg" 
+                src="https://i.postimg.cc/hP27TpLy/brinquedo_6.webp" 
                 alt="Parque Coberto" 
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
@@ -273,7 +273,7 @@ export default function App() {
             {/* Gallery Item 6 */}
             <div className="group relative aspect-[4/5] rounded-3xl overflow-hidden bg-slate-200 cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-500 border-4 border-white">
               <img 
-                src="/brinquedo-6.jpg" 
+                src="https://i.postimg.cc/5N4CXZC7/brinquedo_5.webp" 
                 alt="Domo de Escalada" 
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
