@@ -302,6 +302,27 @@ export default function App() {
         </div>
       </section>
 
+      {/* Location Section */}
+      <section className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <h2 className="text-4xl md:text-5xl font-black text-[var(--color-brand-darkblue)] mb-6">Onde Estamos</h2>
+            <p className="text-xl text-slate-600 font-medium">
+              Venha nos fazer uma visita e conhecer de perto a qualidade da Krenke Nordeste.
+            </p>
+          </div>
+          <div className="w-full h-[450px] rounded-3xl overflow-hidden shadow-2xl border-8 border-slate-100">
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1461.138988095373!2d-35.58405776134175!3d-8.686025122563732!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x700a1007be4d5bd%3A0xa91a68d1ab9d6ba6!2sKrenke%20Brinquedos%20-%20Playgrounds%20Infantil%20em%20Palmares!5e1!3m2!1spt-BR!2sbr!4v1773272978858!5m2!1spt-BR!2sbr" 
+              className="w-full h-full border-0" 
+              allowFullScreen={true} 
+              loading="lazy" 
+              referrerPolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
       <footer id="contato" className="bg-slate-900 text-slate-400 py-16 border-t-8 border-[var(--color-brand-pink)]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
