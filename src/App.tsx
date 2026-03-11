@@ -125,7 +125,7 @@ export default function App() {
             className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto"
           >
             <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" className="bg-[var(--color-brand-pink)] hover:bg-[#d0007b] text-white px-8 py-4 rounded-2xl font-bold text-lg shadow-xl transition-all hover:-translate-y-1 flex items-center justify-center gap-2">
-              Falar com Especialista <ChevronRight className="w-5 h-5" />
+              Falar com Sílvio Romero <ChevronRight className="w-5 h-5" />
             </a>
             <a href="#produtos" className="bg-white hover:bg-slate-50 text-[var(--color-brand-darkblue)] border-2 border-[var(--color-brand-blue)]/20 px-8 py-4 rounded-2xl font-bold text-lg shadow-lg shadow-slate-200/50 transition-all hover:-translate-y-1 flex items-center justify-center">
               Ver Projetos
@@ -173,7 +173,7 @@ export default function App() {
             <div className="relative">
               <div className="aspect-[4/5] rounded-[3rem] overflow-hidden bg-slate-100 relative shadow-2xl border-8 border-white flex items-center justify-center">
                 <iframe 
-                  src="https://www.instagram.com/reel/DIey_0npyIk/embed" 
+                  src="https://www.instagram.com/p/DCMqOlqpOpz/embed" 
                   className="absolute inset-0 w-full h-full border-0"
                   scrolling="no"
                   allowtransparency="true"
@@ -185,7 +185,7 @@ export default function App() {
               {/* Floating badge */}
               <div className="absolute -bottom-8 -left-8 bg-white p-6 rounded-3xl shadow-2xl border-2 border-[var(--color-brand-pink)]/20 transform -rotate-3 z-10">
                 <div className="flex items-center gap-4">
-                  <div className="text-5xl font-black text-[var(--color-brand-pink)]">+10</div>
+                  <div className="text-5xl font-black text-[var(--color-brand-pink)]">+30</div>
                   <div className="text-base font-bold text-slate-700 leading-tight">Anos de<br/>Experiência</div>
                 </div>
               </div>
