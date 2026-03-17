@@ -23,13 +23,16 @@ export default function App() {
         <Smile className="w-6 h-6 text-black" strokeWidth={2.5} />
         <Smile className="w-6 h-6 text-black" strokeWidth={2.5} />
       </div>
-      <div className="font-black text-4xl tracking-tighter flex items-center bg-white px-3 py-1 rounded-2xl shadow-sm border-2 border-slate-100">
-        <span className="text-[var(--color-brand-green)] drop-shadow-sm">K</span>
-        <span className="text-[var(--color-brand-blue)] drop-shadow-sm">R</span>
-        <span className="text-[var(--color-brand-darkblue)] drop-shadow-sm">E</span>
-        <span className="text-[var(--color-brand-orange)] drop-shadow-sm">N</span>
-        <span className="text-[var(--color-brand-purple)] drop-shadow-sm">K</span>
-        <span className="text-[var(--color-brand-pink)] drop-shadow-sm">E</span>
+      <div className="flex flex-col items-center bg-white px-4 py-2 rounded-2xl shadow-sm border-2 border-slate-100">
+        <div className="font-black text-4xl tracking-tighter flex items-center">
+          <span className="text-[var(--color-brand-green)] drop-shadow-sm">K</span>
+          <span className="text-[var(--color-brand-blue)] drop-shadow-sm">R</span>
+          <span className="text-[var(--color-brand-darkblue)] drop-shadow-sm">E</span>
+          <span className="text-[var(--color-brand-orange)] drop-shadow-sm">N</span>
+          <span className="text-[var(--color-brand-purple)] drop-shadow-sm">K</span>
+          <span className="text-[var(--color-brand-pink)] drop-shadow-sm">E</span>
+        </div>
+        <span className="text-[11px] font-black tracking-[0.35em] text-slate-400 uppercase mt-0.5 pl-1">Nordeste</span>
       </div>
       <span className="font-handwriting text-xl text-black mt-1 tracking-wide">o melhor jeito de brincar</span>
     </div>
