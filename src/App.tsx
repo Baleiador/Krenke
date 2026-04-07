@@ -32,7 +32,7 @@ export default function App() {
           <span className="text-[var(--color-brand-purple)] drop-shadow-sm">K</span>
           <span className="text-[var(--color-brand-pink)] drop-shadow-sm">E</span>
         </div>
-        <span className="text-[11px] font-black tracking-[0.35em] text-slate-400 uppercase mt-0.5 pl-1">Brasil Oficial</span>
+        <span className="text-[11px] font-black tracking-[0.35em] text-slate-400 uppercase mt-0.5 pl-1">Mata Sul </span>
       </div>
       <span className="font-handwriting text-xl text-black mt-1 tracking-wide">o melhor jeito de brincar</span>
     </div>
