@@ -1,13 +1,41 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, Instagram, Facebook, Linkedin, MessageCircle, ChevronRight, ShieldCheck, Wrench, Smile, Star } from 'lucide-react';
+import { Menu, X, Instagram, Facebook, Linkedin, MessageCircle, ChevronRight, ChevronLeft, ShieldCheck, Wrench, Smile, Star } from 'lucide-react';
 import { motion } from 'motion/react';
 
 export default function App() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   const WHATSAPP_LINK = "https://wa.me/5581998312244";
   const INSTAGRAM_LINK = "https://www.instagram.com/krenkenordeste?igsh=MXM0em45azJpdGFmNA%3D%3D";
+
+  const GALLERY_IMAGES = [
+    { src: "https://i.postimg.cc/t44B7x0y/imagem-1.jpg", title: "Playground Completo", desc: "Estrutura multifuncional para todas as idades", color: "darkblue" },
+    { src: "https://i.postimg.cc/6ppMTvst/imagem-2.jpg", title: "Estação de Diversão", desc: "Cores vibrantes e muita interatividade", color: "purple" },
+    { src: "https://i.postimg.cc/Hkk6jyGp/imagem-4.jpg", title: "Circuito Aventura", desc: "Desafios que estimulam a coordenação", color: "orange" },
+    { src: "https://i.postimg.cc/8zzZs68T/imagem-5.jpg", title: "Parque Infantil", desc: "Segurança e alegria em cada detalhe", color: "green" },
+    { src: "https://i.postimg.cc/dVV5DyM3/imagem-6.jpg", title: "Estrutura Lúdica", desc: "Design moderno que encanta as crianças", color: "blue" },
+    { src: "https://i.postimg.cc/K8804MX8/imagem-7.jpg", title: "Complexo de Brincadeiras", desc: "Múltiplas atividades em um só lugar", color: "pink" },
+    { src: "https://i.postimg.cc/6ppMTvsQ/imagem-8.jpg", title: "Playground Premium", desc: "Acabamento impecável e alta durabilidade", color: "darkblue" },
+    { src: "https://i.postimg.cc/8zzZs685/imagem-9.jpg", title: "Área de Recreação", desc: "O espaço perfeito para gastar energia", color: "purple" },
+    { src: "https://i.postimg.cc/fRR8k943/imagem-10.jpg", title: "Estação Interativa", desc: "Brincadeira que desenvolve habilidades", color: "orange" },
+    { src: "https://i.postimg.cc/133v4qxn/imagem-11.jpg", title: "Parque Colorido", desc: "Um mundo de fantasia e movimento", color: "green" },
+    { src: "https://i.postimg.cc/YCCdjWcL/imagem-12.jpg", title: "Circuito Divertido", desc: "Escorregadores e obstáculos seguros", color: "blue" },
+    { src: "https://i.postimg.cc/JzzptkwB/imagem-13.jpg", title: "Mega Playground", desc: "A atração principal de qualquer espaço", color: "pink" }
+  ];
+
+  // Keyboard navigation for lightbox
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (lightboxIndex === null) return;
+      if (e.key === 'Escape') setLightboxIndex(null);
+      if (e.key === 'ArrowRight') setLightboxIndex((prev) => (prev !== null ? (prev + 1) % GALLERY_IMAGES.length : null));
+      if (e.key === 'ArrowLeft') setLightboxIndex((prev) => (prev !== null ? (prev - 1 + GALLERY_IMAGES.length) % GALLERY_IMAGES.length : null));
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [lightboxIndex]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,7 +60,7 @@ export default function App() {
           <span className="text-[var(--color-brand-purple)] drop-shadow-sm">K</span>
           <span className="text-[var(--color-brand-pink)] drop-shadow-sm">E</span>
         </div>
-        <span className="text-[11px] font-black tracking-[0.35em] text-slate-400 uppercase mt-0.5 pl-1">Nordeste Oficial® </span>
+        <span className="text-[11px] font-black tracking-[0.35em] text-slate-500 uppercase mt-1 pl-1">Nordeste Oficial®</span>
       </div>
       <span className="font-handwriting text-xl text-black mt-1 tracking-wide">o melhor jeito de brincar</span>
     </div>
@@ -128,7 +156,7 @@ export default function App() {
             className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto"
           >
             <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" className="bg-[var(--color-brand-pink)] hover:bg-[#d0007b] text-white px-8 py-4 rounded-2xl font-bold text-lg shadow-xl transition-all hover:-translate-y-1 flex items-center justify-center gap-2">
-              Falar com Sílvio Romero <ChevronRight className="w-5 h-5" />
+              Falar com Sílvio Cavalcanti <ChevronRight className="w-5 h-5" />
             </a>
             <a href="#produtos" className="bg-white hover:bg-slate-50 text-[var(--color-brand-darkblue)] border-2 border-[var(--color-brand-blue)]/20 px-8 py-4 rounded-2xl font-bold text-lg shadow-lg shadow-slate-200/50 transition-all hover:-translate-y-1 flex items-center justify-center">
               Ver Projetos
@@ -207,84 +235,21 @@ export default function App() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Gallery Item 1 */}
-            <div className="group relative aspect-[4/5] rounded-3xl overflow-hidden bg-slate-200 cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-500 border-4 border-white">
-              <img 
-                src="https://i.postimg.cc/3J8vkPvq/brinquedo_1.jpg" 
-                alt="Playground ao Ar Livre" 
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-brand-darkblue)]/90 via-[var(--color-brand-darkblue)]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
-                <h3 className="text-white text-3xl font-black mb-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Playground ao Ar Livre</h3>
-                <p className="text-[var(--color-brand-blue)] font-bold text-lg translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Com balanços e escorregadores</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pb-12">
+            {GALLERY_IMAGES.map((item, index) => (
+              <div key={index} onClick={() => setLightboxIndex(index)} className={`group relative aspect-[4/5] rounded-3xl overflow-hidden bg-slate-200 cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-500 border-4 border-white ${index % 3 === 1 ? 'lg:translate-y-8' : ''}`}>
+                <img 
+                  src={item.src} 
+                  alt={item.title} 
+                  loading="lazy"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className={`absolute inset-0 bg-gradient-to-t from-[var(--color-brand-${item.color})]/90 via-[var(--color-brand-${item.color})]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8`}>
+                  <h3 className="text-white text-3xl font-black mb-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">{item.title}</h3>
+                  <p className="text-white/90 font-bold text-lg translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">{item.desc}</p>
+                </div>
               </div>
-            </div>
-
-            {/* Gallery Item 2 */}
-            <div className="group relative aspect-[4/5] rounded-3xl overflow-hidden bg-slate-200 cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-500 lg:translate-y-8 border-4 border-white">
-              <img 
-                src="https://i.postimg.cc/DyxbLBrc/brinquedo_2.webp" 
-                alt="Estação Colorida" 
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-brand-purple)]/90 via-[var(--color-brand-purple)]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
-                <h3 className="text-white text-3xl font-black mb-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Estação Colorida</h3>
-                <p className="text-[var(--color-brand-pink)] font-bold text-lg translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Escorregadores em espiral</p>
-              </div>
-            </div>
-
-            {/* Gallery Item 3 */}
-            <div className="group relative aspect-[4/5] rounded-3xl overflow-hidden bg-slate-200 cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-500 border-4 border-white">
-              <img 
-                src="https://i.postimg.cc/sDjhMthN/brinquedo_3.jpg" 
-                alt="Circuito de Tubos" 
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-brand-orange)]/90 via-[var(--color-brand-orange)]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
-                <h3 className="text-white text-3xl font-black mb-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Circuito de Tubos</h3>
-                <p className="text-white font-bold text-lg translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Aventura em túneis</p>
-              </div>
-            </div>
-            
-            {/* Gallery Item 4 */}
-            <div className="group relative aspect-[4/5] rounded-3xl overflow-hidden bg-slate-200 cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-500 border-4 border-white">
-              <img 
-                src="https://i.postimg.cc/nrPpcjmS/brinquedo_4.webp" 
-                alt="Área Kids Interna" 
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-brand-green)]/90 via-[var(--color-brand-green)]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
-                <h3 className="text-white text-3xl font-black mb-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Área Kids Interna</h3>
-                <p className="text-[var(--color-brand-orange)] font-bold text-lg translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Perfeito para espaços fechados</p>
-              </div>
-            </div>
-
-            {/* Gallery Item 5 */}
-            <div className="group relative aspect-[4/5] rounded-3xl overflow-hidden bg-slate-200 cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-500 lg:translate-y-8 border-4 border-white">
-              <img 
-                src="https://i.postimg.cc/hP27TpLy/brinquedo_6.webp" 
-                alt="Parque Coberto" 
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-brand-blue)]/90 via-[var(--color-brand-blue)]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
-                <h3 className="text-white text-3xl font-black mb-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Parque Coberto</h3>
-                <p className="text-white font-bold text-lg translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Diversão protegida do sol</p>
-              </div>
-            </div>
-
-            {/* Gallery Item 6 */}
-            <div className="group relative aspect-[4/5] rounded-3xl overflow-hidden bg-slate-200 cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-500 border-4 border-white">
-              <img 
-                src="https://i.postimg.cc/5N4CXZC7/brinquedo_5.webp" 
-                alt="Domo de Escalada" 
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-brand-pink)]/90 via-[var(--color-brand-pink)]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
-                <h3 className="text-white text-3xl font-black mb-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Domo de Escalada</h3>
-                <p className="text-white font-bold text-lg translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Desenvolvimento motor e diversão</p>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
@@ -383,6 +348,47 @@ export default function App() {
           Fale conosco!
         </span>
       </a>
+
+      {/* Lightbox Modal */}
+      {lightboxIndex !== null && (
+        <div className="fixed inset-0 z-[100] bg-slate-900/95 backdrop-blur-sm flex items-center justify-center p-4" onClick={() => setLightboxIndex(null)}>
+          <button className="absolute top-6 right-6 text-white/70 hover:text-white transition-colors z-50 bg-white/10 hover:bg-white/20 p-2 rounded-full" onClick={() => setLightboxIndex(null)}>
+            <X className="w-8 h-8" />
+          </button>
+          
+          <button 
+            className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 text-white/70 hover:text-white transition-colors z-50 bg-white/10 hover:bg-white/20 p-3 rounded-full" 
+            onClick={(e) => {
+              e.stopPropagation();
+              setLightboxIndex((prev) => (prev !== null ? (prev - 1 + GALLERY_IMAGES.length) % GALLERY_IMAGES.length : null));
+            }}
+          >
+            <ChevronLeft className="w-8 h-8" />
+          </button>
+
+          <div className="relative max-w-5xl w-full max-h-[85vh] flex flex-col items-center" onClick={(e) => e.stopPropagation()}>
+            <img 
+              src={GALLERY_IMAGES[lightboxIndex].src} 
+              alt={GALLERY_IMAGES[lightboxIndex].title}
+              className="max-w-full max-h-[70vh] object-contain rounded-2xl shadow-2xl"
+            />
+            <div className="text-center mt-6">
+              <h3 className="text-3xl font-black text-white mb-2">{GALLERY_IMAGES[lightboxIndex].title}</h3>
+              <p className="text-white/80 text-xl">{GALLERY_IMAGES[lightboxIndex].desc}</p>
+            </div>
+          </div>
+
+          <button 
+            className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 text-white/70 hover:text-white transition-colors z-50 bg-white/10 hover:bg-white/20 p-3 rounded-full" 
+            onClick={(e) => {
+              e.stopPropagation();
+              setLightboxIndex((prev) => (prev !== null ? (prev + 1) % GALLERY_IMAGES.length : null));
+            }}
+          >
+            <ChevronRight className="w-8 h-8" />
+          </button>
+        </div>
+      )}
     </div>
   );
 }
