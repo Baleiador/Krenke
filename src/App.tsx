@@ -86,13 +86,13 @@ export default function App() {
   }, []);
 
   const Logo = ({ isDarkBg = false }: { isDarkBg?: boolean }) => (
-    <div className="flex flex-col items-center justify-center scale-90 origin-left">
-      <div className="flex gap-1 mb-1">
-        <Smile className={`w-6 h-6 ${isDarkBg ? 'text-white' : 'text-black'}`} strokeWidth={2.5} />
-        <Smile className={`w-6 h-6 ${isDarkBg ? 'text-white' : 'text-black'}`} strokeWidth={2.5} />
+    <div className="flex flex-col items-start md:items-center justify-center">
+      <div className="flex gap-1 mb-1 items-center self-center md:self-auto">
+        <Smile className={`w-4 h-4 md:w-6 md:h-6 ${isDarkBg ? 'text-white' : 'text-black'}`} strokeWidth={2.5} />
+        <Smile className={`w-4 h-4 md:w-6 md:h-6 ${isDarkBg ? 'text-white' : 'text-black'}`} strokeWidth={2.5} />
       </div>
-      <div className="flex flex-col items-center bg-white px-4 py-2 rounded-2xl shadow-sm border-2 border-slate-100">
-        <div className="font-black text-4xl tracking-tighter flex items-center">
+      <div className="flex flex-col items-center bg-white px-2 py-1 md:px-4 md:py-2 rounded-xl md:rounded-2xl shadow-sm border border-slate-100">
+        <div className="font-black text-2xl md:text-4xl tracking-tighter flex items-center leading-none">
           <span className="text-[var(--color-brand-green)] drop-shadow-sm">K</span>
           <span className="text-[var(--color-brand-blue)] drop-shadow-sm">R</span>
           <span className="text-[var(--color-brand-darkblue)] drop-shadow-sm">E</span>
@@ -100,13 +100,13 @@ export default function App() {
           <span className="text-[var(--color-brand-purple)] drop-shadow-sm">K</span>
           <span className="text-[var(--color-brand-pink)] drop-shadow-sm">E</span>
         </div>
-        <span className="text-[12px] font-black tracking-[0.25em] text-slate-600 uppercase mt-1 pl-1">Playgrounds</span>
-        <span className="text-[9px] font-bold tracking-[0.15em] text-slate-400 uppercase mt-0.5">De Pernambuco</span>
+        <span className="text-[9px] md:text-[12px] font-black tracking-[0.25em] text-slate-600 uppercase mt-1 pl-1">Playgrounds</span>
+        <span className="text-[7px] md:text-[9px] font-bold tracking-[0.15em] text-slate-400 uppercase mt-0.5">De Pernambuco</span>
       </div>
-      <div className={`flex flex-col items-center mt-2 transition-colors duration-300 ${isDarkBg ? 'text-white' : 'text-slate-800'}`}>
-        <span className="font-handwriting text-xl tracking-wide drop-shadow-sm">o melhor jeito de brincar</span>
-        <div className={`flex items-center gap-2 mt-0.5 opacity-90 ${isDarkBg ? 'text-white' : 'text-slate-600'}`}>
-            <span className="font-handwriting text-sm tracking-wider">por Silvio Romero Cavalcanti</span>
+      <div className={`flex flex-col items-center mt-1 md:mt-2 transition-colors duration-300 ${isDarkBg ? 'text-white' : 'text-slate-800'}`}>
+        <span className="font-handwriting text-lg md:text-xl tracking-wide drop-shadow-sm text-center line-clamp-1">o melhor jeito de brincar</span>
+        <div className={`flex items-center gap-1 md:gap-2 opacity-90 ${isDarkBg ? 'text-white' : 'text-slate-600'}`}>
+            <span className="font-handwriting text-[10px] md:text-sm tracking-widest md:tracking-wider">por Silvio Romero Cavalcanti</span>
         </div>
       </div>
     </div>
@@ -116,7 +116,7 @@ export default function App() {
     <div className="min-h-screen bg-[#F4F7FB] text-slate-900 font-sans selection:bg-[var(--color-brand-blue)] selection:text-white overflow-x-hidden">
       {/* Header */}
       <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white/95 backdrop-blur-md shadow-sm py-2' : 'bg-transparent py-4'}`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-start md:items-center">
           <a href="#" className="block">
             <Logo isDarkBg={!isScrolled} />
           </a>
@@ -133,7 +133,7 @@ export default function App() {
           </nav>
 
           {/* Mobile Menu Toggle */}
-          <button className="md:hidden text-slate-800 p-2 bg-white rounded-full shadow-sm" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+          <button className="md:hidden text-slate-800 p-2 bg-white rounded-full shadow-sm mt-1" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
             {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
@@ -157,7 +157,7 @@ export default function App() {
       </header>
 
       {/* Hero Section */}
-      <section className="relative pt-40 pb-20 lg:pt-56 lg:pb-32 overflow-hidden">
+      <section className="relative pt-44 md:pt-48 pb-20 lg:pt-56 lg:pb-32 overflow-hidden">
         {/* Background Slider */}
         <div className="absolute inset-0 z-0 bg-slate-900">
           {HERO_IMAGES.map((img, idx) => (
@@ -197,7 +197,7 @@ export default function App() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-5xl md:text-7xl font-black text-white tracking-tight leading-[1.1] max-w-4xl mb-6 drop-shadow-lg"
+            className="text-4xl sm:text-5xl md:text-7xl font-black text-white tracking-tight leading-[1.15] max-w-4xl mb-6 drop-shadow-lg"
           >
             A diversão não tem limites quando o tamanho é <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#4db8ff] via-[#b366ff] to-[#ff4d94]">gigante</span>.
           </motion.h1>
