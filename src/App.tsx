@@ -1,14 +1,23 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, Instagram, Facebook, Linkedin, MessageCircle, ChevronRight, ChevronLeft, ShieldCheck, Wrench, Smile, Star } from 'lucide-react';
+import { Menu, X, Instagram, Facebook, Linkedin, MessageCircle, ChevronRight, ChevronLeft, ChevronDown, ShieldCheck, Wrench, Smile, Star, Plus } from 'lucide-react';
 import { motion } from 'motion/react';
 
 export default function App() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const [heroCarouselIndex, setHeroCarouselIndex] = useState(0);
+  const [activeFaq, setActiveFaq] = useState<number | null>(null);
 
   const WHATSAPP_LINK = "https://wa.me/5581998312244";
   const INSTAGRAM_LINK = "https://www.instagram.com/krenkenordeste?igsh=MXM0em45azJpdGFmNA%3D%3D";
+
+  const HERO_IMAGES = [
+    "https://i.postimg.cc/t44B7x0y/imagem-1.jpg",
+    "https://i.postimg.cc/133v4qxn/imagem-11.jpg",
+    "https://i.postimg.cc/fRR8k943/imagem-10.jpg",
+    "https://i.postimg.cc/JzzptkwB/imagem-13.jpg"
+  ];
 
   const GALLERY_IMAGES = [
     { src: "https://i.postimg.cc/t44B7x0y/imagem-1.jpg", title: "Playground Completo", desc: "Estrutura multifuncional para todas as idades", color: "darkblue" },
@@ -24,6 +33,37 @@ export default function App() {
     { src: "https://i.postimg.cc/YCCdjWcL/imagem-12.jpg", title: "Circuito Divertido", desc: "Escorregadores e obstáculos seguros", color: "blue" },
     { src: "https://i.postimg.cc/JzzptkwB/imagem-13.jpg", title: "Mega Playground", desc: "A atração principal de qualquer espaço", color: "pink" }
   ];
+
+  const FAQS = [
+    { 
+      question: "Quais materiais são utilizados na fabricação?", 
+      answer: "Trabalhamos com materiais de ponta como aço galvanizado e plásticos rotomoldados de alta resistência (polietileno), garantindo segurança, durabilidade e proteção contra raios solares UV e intempéries." 
+    },
+    { 
+      question: "Criam e fabricam projetos sob medida para o meu espaço?", 
+      answer: "Sim! Entendemos que cada espaço é único. Nossa equipe técnica projeta soluções flexíveis e personalizadas sob medida para a sua necessidade, seja em escolas, condomínios ou praças." 
+    },
+    { 
+      question: "Como funciona a manutenção e garantia dos brinquedos?", 
+      answer: "Oferecemos garantia estrutural de fábrica e possuímos uma equipe técnica especializada para prestar total suporte e manutenção preventiva ou corretiva necessária." 
+    },
+    { 
+      question: "Atendem toda região do Nordeste?", 
+      answer: "Sim! Somos pioneiros no Nordeste e temos capacidade logística montada para atender e instalar nossos projetos em qualquer estado e cidade da região com rapidez e eficiência." 
+    },
+    { 
+      question: "Os brinquedos são seguros e seguem as normas da ABNT?", 
+      answer: "Com certeza, nossa prioridade número um é a segurança. Todos os nossos produtos e pisos são fabricados rigorosamente de acordo com as normas da ABNT, com total atenção técnica infantil para minimizar qualquer risco e proporcionar apenas diversão aos pequenos." 
+    }
+  ];
+
+  // Hero Carousel Logic
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setHeroCarouselIndex((prev) => (prev + 1) % HERO_IMAGES.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
 
   // Keyboard navigation for lightbox
   useEffect(() => {
@@ -45,11 +85,11 @@ export default function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const Logo = () => (
+  const Logo = ({ isDarkBg = false }: { isDarkBg?: boolean }) => (
     <div className="flex flex-col items-center justify-center scale-90 origin-left">
       <div className="flex gap-1 mb-1">
-        <Smile className="w-6 h-6 text-black" strokeWidth={2.5} />
-        <Smile className="w-6 h-6 text-black" strokeWidth={2.5} />
+        <Smile className={`w-6 h-6 ${isDarkBg ? 'text-white' : 'text-black'}`} strokeWidth={2.5} />
+        <Smile className={`w-6 h-6 ${isDarkBg ? 'text-white' : 'text-black'}`} strokeWidth={2.5} />
       </div>
       <div className="flex flex-col items-center bg-white px-4 py-2 rounded-2xl shadow-sm border-2 border-slate-100">
         <div className="font-black text-4xl tracking-tighter flex items-center">
@@ -60,9 +100,15 @@ export default function App() {
           <span className="text-[var(--color-brand-purple)] drop-shadow-sm">K</span>
           <span className="text-[var(--color-brand-pink)] drop-shadow-sm">E</span>
         </div>
-        <span className="text-[11px] font-black tracking-[0.35em] text-slate-500 uppercase mt-1 pl-1">Nordeste Oficial®</span>
+        <span className="text-[12px] font-black tracking-[0.25em] text-slate-600 uppercase mt-1 pl-1">Playgrounds</span>
+        <span className="text-[9px] font-bold tracking-[0.15em] text-slate-400 uppercase mt-0.5">De Pernambuco</span>
       </div>
-      <span className="font-handwriting text-xl text-black mt-1 tracking-wide">o melhor jeito de brincar</span>
+      <div className={`flex flex-col items-center mt-2 transition-colors duration-300 ${isDarkBg ? 'text-white' : 'text-slate-800'}`}>
+        <span className="font-handwriting text-xl tracking-wide drop-shadow-sm">o melhor jeito de brincar</span>
+        <div className={`flex items-center gap-2 mt-0.5 opacity-90 ${isDarkBg ? 'text-white' : 'text-slate-600'}`}>
+            <span className="font-handwriting text-sm tracking-wider">por Silvio Romero Cavalcanti</span>
+        </div>
+      </div>
     </div>
   );
 
@@ -72,14 +118,14 @@ export default function App() {
       <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white/95 backdrop-blur-md shadow-sm py-2' : 'bg-transparent py-4'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
           <a href="#" className="block">
-            <Logo />
+            <Logo isDarkBg={!isScrolled} />
           </a>
 
           {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-8 font-bold text-slate-600">
-            <a href="#conheca-nos" className="hover:text-[var(--color-brand-pink)] transition-colors">Conheça-nos</a>
-            <a href="#produtos" className="hover:text-[var(--color-brand-blue)] transition-colors">Produtos</a>
-            <a href="#contato" className="hover:text-[var(--color-brand-orange)] transition-colors">Contato</a>
+          <nav className={`hidden md:flex items-center gap-8 font-bold transition-colors duration-300 ${!isScrolled ? 'text-white/90 drop-shadow-md' : 'text-slate-600'}`}>
+            <a href="#conheca-nos" className={`transition-colors ${!isScrolled ? 'hover:text-white' : 'hover:text-[var(--color-brand-pink)]'}`}>Conheça-nos</a>
+            <a href="#produtos" className={`transition-colors ${!isScrolled ? 'hover:text-white' : 'hover:text-[var(--color-brand-blue)]'}`}>Produtos</a>
+            <a href="#contato" className={`transition-colors ${!isScrolled ? 'hover:text-white' : 'hover:text-[var(--color-brand-orange)]'}`}>Contato</a>
             <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" className="bg-[var(--color-brand-green)] hover:bg-[#008f45] text-white px-6 py-3 rounded-full shadow-lg transition-all hover:-translate-y-1 active:translate-y-0 flex items-center gap-2">
               <MessageCircle className="w-5 h-5" />
               Solicitar Orçamento
@@ -112,39 +158,55 @@ export default function App() {
 
       {/* Hero Section */}
       <section className="relative pt-40 pb-20 lg:pt-56 lg:pb-32 overflow-hidden">
-        {/* Decorative background blobs using brand colors */}
-        <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none opacity-60">
-          <div className="absolute top-[-10%] left-[-5%] w-[40%] h-[40%] rounded-full bg-[var(--color-brand-blue)]/20 blur-3xl"></div>
-          <div className="absolute top-[10%] right-[-5%] w-[30%] h-[30%] rounded-full bg-[var(--color-brand-pink)]/20 blur-3xl"></div>
-          <div className="absolute bottom-[-10%] left-[20%] w-[50%] h-[50%] rounded-full bg-[var(--color-brand-orange)]/20 blur-3xl"></div>
-          <div className="absolute bottom-[20%] right-[10%] w-[20%] h-[20%] rounded-full bg-[var(--color-brand-green)]/20 blur-3xl"></div>
+        {/* Background Slider */}
+        <div className="absolute inset-0 z-0 bg-slate-900">
+          {HERO_IMAGES.map((img, idx) => (
+            <div
+              key={img}
+              className={`absolute inset-0 transition-opacity duration-1000 ${
+                idx === heroCarouselIndex ? 'opacity-100' : 'opacity-0'
+              }`}
+            >
+              <img src={img} alt="Background" className="w-full h-full object-cover" />
+            </div>
+          ))}
+          {/* Dark Overlay for Text Readability - slightly stronger at top for logo/header */}
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-900/80 via-slate-900/60 to-slate-900/80 backdrop-blur-[2px]"></div>
         </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center">
+        {/* Decorative background blobs - tuned down to look good over dark bg */}
+        <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0 pointer-events-none opacity-50 mix-blend-screen">
+          <div className="absolute top-[-10%] left-[-5%] w-[40%] h-[40%] rounded-full bg-[var(--color-brand-blue)]/30 blur-[100px]"></div>
+          <div className="absolute top-[10%] right-[-5%] w-[30%] h-[30%] rounded-full bg-[var(--color-brand-pink)]/30 blur-[100px]"></div>
+          <div className="absolute bottom-[-10%] left-[20%] w-[50%] h-[50%] rounded-full bg-[var(--color-brand-orange)]/30 blur-[100px]"></div>
+          <div className="absolute bottom-[20%] right-[10%] w-[20%] h-[20%] rounded-full bg-[var(--color-brand-green)]/30 blur-[100px]"></div>
+        </div>
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white shadow-md border border-slate-100 text-[var(--color-brand-darkblue)] font-bold text-sm mb-8"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/10 backdrop-blur-md shadow-md border border-white/20 text-white font-bold text-sm mb-8"
           >
-            <Star className="w-4 h-4 text-[var(--color-brand-orange)] fill-[var(--color-brand-orange)]" />
-            Fabricando Sonhos em Escala Gigante
+            <Star className="w-4 h-4 text-[var(--color-brand-orange)] fill-[var(--color-brand-orange)] drop-shadow-sm" />
+            <span className="drop-shadow-md">Fabricando Sonhos em Escala Gigante</span>
           </motion.div>
           
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-5xl md:text-7xl font-black text-slate-800 tracking-tight leading-[1.1] max-w-4xl mb-6"
+            className="text-5xl md:text-7xl font-black text-white tracking-tight leading-[1.1] max-w-4xl mb-6 drop-shadow-lg"
           >
-            A diversão não tem limites quando o tamanho é <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-brand-blue)] via-[var(--color-brand-purple)] to-[var(--color-brand-pink)]">gigante</span>.
+            A diversão não tem limites quando o tamanho é <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#4db8ff] via-[#b366ff] to-[#ff4d94]">gigante</span>.
           </motion.h1>
           
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-lg md:text-2xl text-slate-600 max-w-2xl mb-10 font-medium leading-relaxed"
+            className="text-lg md:text-2xl text-white/90 max-w-2xl mb-10 font-medium leading-relaxed drop-shadow-md"
           >
             Criamos estruturas lúdicas monumentais que transformam qualquer espaço em uma aventura inesquecível, com total segurança e qualidade.
           </motion.p>
@@ -155,10 +217,10 @@ export default function App() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto"
           >
-            <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" className="bg-[var(--color-brand-pink)] hover:bg-[#d0007b] text-white px-8 py-4 rounded-2xl font-bold text-lg shadow-xl transition-all hover:-translate-y-1 flex items-center justify-center gap-2">
+            <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" className="bg-[var(--color-brand-pink)] hover:bg-[#d0007b] text-white px-8 py-4 rounded-2xl font-bold text-lg shadow-[0_0_20px_rgba(236,0,140,0.4)] transition-all hover:-translate-y-1 flex items-center justify-center gap-2">
               Falar com Sílvio Cavalcanti <ChevronRight className="w-5 h-5" />
             </a>
-            <a href="#produtos" className="bg-white hover:bg-slate-50 text-[var(--color-brand-darkblue)] border-2 border-[var(--color-brand-blue)]/20 px-8 py-4 rounded-2xl font-bold text-lg shadow-lg shadow-slate-200/50 transition-all hover:-translate-y-1 flex items-center justify-center">
+            <a href="#produtos" className="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/30 px-8 py-4 rounded-2xl font-bold text-lg shadow-lg transition-all hover:-translate-y-1 flex items-center justify-center">
               Ver Projetos
             </a>
           </motion.div>
@@ -254,6 +316,47 @@ export default function App() {
         </div>
       </section>
 
+      {/* FAQ Section */}
+      <section className="py-24 bg-white relative">
+        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-[0.03]"></div>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-black text-[var(--color-brand-darkblue)] mb-6">Perguntas Frequentes</h2>
+            <p className="text-xl text-slate-600 font-medium max-w-2xl mx-auto">
+              Tire suas principais dúvidas sobre nossos playgrounds, qualidade, entrega e segurança.
+            </p>
+          </div>
+
+          <div className="space-y-4">
+            {FAQS.map((faq, index) => (
+              <div 
+                key={index} 
+                className={`border-2 rounded-2xl overflow-hidden transition-all duration-300 ${activeFaq === index ? 'border-[var(--color-brand-pink)] bg-slate-50' : 'border-slate-100 bg-white hover:border-slate-200'}`}
+              >
+                <button
+                  className="w-full text-left px-6 py-5 flex items-center justify-between focus:outline-none"
+                  onClick={() => setActiveFaq(activeFaq === index ? null : index)}
+                >
+                  <span className={`font-bold text-lg md:text-xl pr-8 ${activeFaq === index ? 'text-[var(--color-brand-pink)]' : 'text-slate-800'}`}>
+                    {faq.question}
+                  </span>
+                  <div className={`shrink-0 w-10 h-10 rounded-full flex items-center justify-center transition-transform duration-300 ${activeFaq === index ? 'bg-[var(--color-brand-pink)]/10 text-[var(--color-brand-pink)] rotate-180' : 'bg-slate-100 text-slate-400'}`}>
+                    <ChevronDown className="w-6 h-6" />
+                  </div>
+                </button>
+                <div 
+                  className={`overflow-hidden transition-all duration-300 ease-in-out ${activeFaq === index ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}
+                >
+                  <div className="px-6 pb-6 pt-0 text-slate-600 text-lg">
+                    {faq.answer}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="py-24 bg-[var(--color-brand-darkblue)] relative overflow-hidden">
         <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[var(--color-brand-blue)] via-transparent to-transparent"></div>
@@ -298,7 +401,7 @@ export default function App() {
             
             <div className="flex flex-col items-center md:items-start">
               <div className="bg-white p-4 rounded-2xl mb-6 inline-block">
-                <Logo />
+                <Logo isDarkBg={false} />
               </div>
               <p className="text-base text-center md:text-left max-w-xs font-medium">
                 Fabricando sonhos em escala gigante com segurança, qualidade e muita diversão.
