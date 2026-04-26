@@ -86,13 +86,13 @@ export default function App() {
   }, []);
 
   const Logo = ({ isDarkBg = false }: { isDarkBg?: boolean }) => (
-    <div className="flex flex-col items-start md:items-center justify-center">
-      <div className="flex gap-1 mb-1 items-center self-center md:self-auto">
-        <Smile className={`w-4 h-4 md:w-6 md:h-6 ${isDarkBg ? 'text-white' : 'text-black'}`} strokeWidth={2.5} />
-        <Smile className={`w-4 h-4 md:w-6 md:h-6 ${isDarkBg ? 'text-white' : 'text-black'}`} strokeWidth={2.5} />
+    <div className="flex flex-col items-center justify-center scale-[0.6] origin-left sm:scale-[0.7] md:scale-90 md:origin-center lg:origin-left">
+      <div className="flex gap-1 mb-1 items-center">
+        <Smile className={`w-6 h-6 ${isDarkBg ? 'text-white' : 'text-black'}`} strokeWidth={2.5} />
+        <Smile className={`w-6 h-6 ${isDarkBg ? 'text-white' : 'text-black'}`} strokeWidth={2.5} />
       </div>
-      <div className="flex flex-col items-center bg-white px-2 py-1 md:px-4 md:py-2 rounded-xl md:rounded-2xl shadow-sm border border-slate-100">
-        <div className="font-black text-2xl md:text-4xl tracking-tighter flex items-center leading-none">
+      <div className="flex flex-col items-center bg-white px-4 py-2 rounded-2xl shadow-sm border border-slate-100">
+        <div className="font-black text-4xl tracking-tighter flex items-center leading-none">
           <span className="text-[var(--color-brand-green)] drop-shadow-sm">K</span>
           <span className="text-[var(--color-brand-blue)] drop-shadow-sm">R</span>
           <span className="text-[var(--color-brand-darkblue)] drop-shadow-sm">E</span>
@@ -100,13 +100,13 @@ export default function App() {
           <span className="text-[var(--color-brand-purple)] drop-shadow-sm">K</span>
           <span className="text-[var(--color-brand-pink)] drop-shadow-sm">E</span>
         </div>
-        <span className="text-[9px] md:text-[12px] font-black tracking-[0.25em] text-slate-600 uppercase mt-1 pl-1">Playgrounds</span>
-        <span className="text-[7px] md:text-[9px] font-bold tracking-[0.15em] text-slate-400 uppercase mt-0.5">De Pernambuco</span>
+        <span className="text-[12px] font-black tracking-[0.25em] text-slate-600 uppercase mt-1 pl-1">Playgrounds</span>
+        <span className="text-[9px] font-bold tracking-[0.15em] text-slate-400 uppercase mt-0.5">De Pernambuco</span>
       </div>
-      <div className={`flex flex-col items-center mt-1 md:mt-2 transition-colors duration-300 ${isDarkBg ? 'text-white' : 'text-slate-800'}`}>
-        <span className="font-handwriting text-lg md:text-xl tracking-wide drop-shadow-sm text-center line-clamp-1">o melhor jeito de brincar</span>
-        <div className={`flex items-center gap-1 md:gap-2 opacity-90 ${isDarkBg ? 'text-white' : 'text-slate-600'}`}>
-            <span className="font-handwriting text-[10px] md:text-sm tracking-widest md:tracking-wider">por Silvio Romero Cavalcanti</span>
+      <div className={`flex flex-col items-center mt-2 transition-colors duration-300 ${isDarkBg ? 'text-white' : 'text-slate-800'}`}>
+        <span className="font-handwriting text-xl tracking-wide drop-shadow-sm text-center">o melhor jeito de brincar</span>
+        <div className={`flex items-center gap-2 opacity-90 ${isDarkBg ? 'text-white' : 'text-slate-600'}`}>
+            <span className="font-handwriting text-sm tracking-wider">por Silvio Romero Cavalcanti</span>
         </div>
       </div>
     </div>
