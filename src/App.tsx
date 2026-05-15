@@ -87,27 +87,27 @@ export default function App() {
 
   const Logo = ({ isDarkBg = false, isScrolled = false }: { isDarkBg?: boolean, isScrolled?: boolean }) => (
     <div className={`flex flex-col items-center justify-center transition-all duration-500 origin-left 
-      ${isScrolled ? 'scale-[0.5] sm:scale-[0.6] md:scale-75' : 'scale-[0.6] sm:scale-[0.7] md:scale-90'} 
+      ${isScrolled ? 'scale-[0.45] sm:scale-[0.55] md:scale-75' : 'scale-[0.5] sm:scale-[0.65] md:scale-90'} 
       md:origin-center lg:origin-left`}>
       <div className={`flex flex-col items-center bg-white rounded-3xl shadow-sm border border-slate-100 relative group transition-all duration-500
-        ${isScrolled ? 'px-4 py-2' : 'px-8 py-6'}`}>
+        ${isScrolled ? 'px-4 py-2' : 'px-8 py-5'}`}>
         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[var(--color-brand-green)] via-[var(--color-brand-blue)] to-[var(--color-brand-pink)] opacity-50"></div>
         
         {/* Branding header: Stamp Effect for Krenke with Brand Colors */}
         <div className={`flex items-center justify-between w-full transition-all duration-500 ${isScrolled ? 'mb-1 gap-4' : 'mb-3 gap-8'}`}>
            <div className={`bg-gradient-to-br from-green-50 to-emerald-100 rounded-xl shadow-inner transition-all duration-500 flex items-center justify-center
             ${isScrolled ? 'p-1.5' : 'p-2'}`}>
-            <Palmtree className={`${isScrolled ? 'w-5 h-5' : 'w-8 h-8'} text-[var(--color-brand-green)]`} />
+            <Palmtree className={`${isScrolled ? 'w-4 h-4' : 'w-8 h-8'} text-[var(--color-brand-green)]`} />
            </div>
            
-           {/* Stamp: Parceiro Krenke Colorful */}
-           <div className={`relative transition-all duration-500 ${isScrolled ? 'scale-75' : 'scale-100'}`}>
-              <div className="border-2 border-[var(--color-brand-blue)]/60 border-dashed rounded-full p-2 -rotate-12 flex flex-col items-center justify-center shadow-inner group-hover:rotate-0 transition-all duration-500 hover:border-solid hover:scale-110 cursor-help bg-white/20">
-                <div className="flex gap-0.5">
+            {/* Stamp: Parceiro Krenke Colorful */}
+           <div className={`relative transition-all duration-700 ${isScrolled ? 'scale-75 translate-x-4 opacity-0 md:opacity-100 md:translate-x-0' : 'scale-100'}`}>
+              <div className="border-2 border-[var(--color-brand-blue)]/30 border-dashed rounded-full p-2.5 -rotate-12 flex flex-col items-center justify-center shadow-sm group-hover:rotate-0 transition-all duration-500 hover:border-solid hover:scale-110 cursor-help bg-white/40 backdrop-blur-[1px]">
+                <div className="flex gap-0.5 mb-0.5">
+                  <Smile className="w-2.5 h-2.5 text-[var(--color-brand-green)]" />
                   <Smile className="w-2.5 h-2.5 text-[var(--color-brand-pink)]" />
-                  <Smile className="w-2.5 h-2.5 text-[var(--color-brand-orange)]" />
                 </div>
-                <div className="flex items-center gap-0.5 mt-0.5">
+                <div className="flex items-center gap-0.5">
                   <span className="text-[7px] font-black tracking-tighter text-[var(--color-brand-green)]">K</span>
                   <span className="text-[7px] font-black tracking-tighter text-[var(--color-brand-blue)]">R</span>
                   <span className="text-[7px] font-black tracking-tighter text-[var(--color-brand-darkblue)]">E</span>
@@ -115,8 +115,10 @@ export default function App() {
                   <span className="text-[7px] font-black tracking-tighter text-[var(--color-brand-purple)]">K</span>
                   <span className="text-[7px] font-black tracking-tighter text-[var(--color-brand-pink)]">E</span>
                 </div>
-                <span className="text-[5px] font-black text-slate-500 uppercase leading-none mt-0.5">OFFICIAL</span>
+                <div className="h-[1px] w-6 bg-slate-200 my-0.5"></div>
+                <span className="text-[5px] font-black text-slate-400 uppercase leading-none tracking-tighter">PARCEIRO BRASIL</span>
               </div>
+              <div className="absolute -top-1 -right-1 bg-red-500 text-[6px] text-white font-black px-1 rounded-full rotate-12 shadow-sm border border-white">OFICIAL</div>
            </div>
         </div>
 
@@ -192,7 +194,7 @@ export default function App() {
       </header>
 
       {/* Hero Section */}
-      <section className="relative pt-44 sm:pt-48 md:pt-56 pb-20 lg:pt-64 lg:pb-32 overflow-hidden">
+      <section className="relative pt-64 sm:pt-72 md:pt-56 pb-20 lg:pt-64 lg:pb-32 overflow-hidden">
         {/* Background Slider */}
         <div className="absolute inset-0 z-0 bg-slate-900">
           {HERO_IMAGES.map((img, idx) => (
