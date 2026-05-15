@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, Instagram, Facebook, Linkedin, MessageCircle, ChevronRight, ChevronLeft, ChevronDown, ShieldCheck, Wrench, Smile, Star, Plus } from 'lucide-react';
+import { Menu, X, Instagram, Facebook, Linkedin, MessageCircle, ChevronRight, ChevronLeft, ChevronDown, ShieldCheck, Wrench, Smile, Star, Plus, Palmtree } from 'lucide-react';
 import { motion } from 'motion/react';
 
 export default function App() {
@@ -85,29 +85,61 @@ export default function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const Logo = ({ isDarkBg = false }: { isDarkBg?: boolean }) => (
-    <div className="flex flex-col items-center justify-center scale-[0.6] origin-left sm:scale-[0.7] md:scale-90 md:origin-center lg:origin-left">
-      <div className="flex gap-1 mb-1 items-center">
-        <Smile className={`w-6 h-6 ${isDarkBg ? 'text-white' : 'text-black'}`} strokeWidth={2.5} />
-        <Smile className={`w-6 h-6 ${isDarkBg ? 'text-white' : 'text-black'}`} strokeWidth={2.5} />
-      </div>
-      <div className="flex flex-col items-center bg-white px-4 py-2 rounded-2xl shadow-sm border border-slate-100">
-        <div className="font-black text-4xl tracking-tighter flex items-center leading-none">
-          <span className="text-[var(--color-brand-green)] drop-shadow-sm">K</span>
-          <span className="text-[var(--color-brand-blue)] drop-shadow-sm">R</span>
-          <span className="text-[var(--color-brand-darkblue)] drop-shadow-sm">E</span>
-          <span className="text-[var(--color-brand-orange)] drop-shadow-sm">N</span>
-          <span className="text-[var(--color-brand-purple)] drop-shadow-sm">K</span>
-          <span className="text-[var(--color-brand-pink)] drop-shadow-sm">E</span>
+  const Logo = ({ isDarkBg = false, isScrolled = false }: { isDarkBg?: boolean, isScrolled?: boolean }) => (
+    <div className={`flex flex-col items-center justify-center transition-all duration-500 origin-left 
+      ${isScrolled ? 'scale-[0.5] sm:scale-[0.6] md:scale-75' : 'scale-[0.6] sm:scale-[0.7] md:scale-90'} 
+      md:origin-center lg:origin-left`}>
+      <div className={`flex flex-col items-center bg-white rounded-3xl shadow-sm border border-slate-100 relative group transition-all duration-500
+        ${isScrolled ? 'px-4 py-2' : 'px-8 py-6'}`}>
+        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[var(--color-brand-green)] via-[var(--color-brand-blue)] to-[var(--color-brand-pink)] opacity-50"></div>
+        
+        {/* Branding header: Stamp Effect for Krenke with Brand Colors */}
+        <div className={`flex items-center justify-between w-full transition-all duration-500 ${isScrolled ? 'mb-1 gap-4' : 'mb-3 gap-8'}`}>
+           <div className={`bg-gradient-to-br from-green-50 to-emerald-100 rounded-xl shadow-inner transition-all duration-500 flex items-center justify-center
+            ${isScrolled ? 'p-1.5' : 'p-2'}`}>
+            <Palmtree className={`${isScrolled ? 'w-5 h-5' : 'w-8 h-8'} text-[var(--color-brand-green)]`} />
+           </div>
+           
+           {/* Stamp: Parceiro Krenke Colorful */}
+           <div className={`relative transition-all duration-500 ${isScrolled ? 'scale-75' : 'scale-100'}`}>
+              <div className="border-2 border-[var(--color-brand-blue)]/60 border-dashed rounded-full p-2 -rotate-12 flex flex-col items-center justify-center shadow-inner group-hover:rotate-0 transition-all duration-500 hover:border-solid hover:scale-110 cursor-help bg-white/20">
+                <div className="flex gap-0.5">
+                  <Smile className="w-2.5 h-2.5 text-[var(--color-brand-pink)]" />
+                  <Smile className="w-2.5 h-2.5 text-[var(--color-brand-orange)]" />
+                </div>
+                <div className="flex items-center gap-0.5 mt-0.5">
+                  <span className="text-[7px] font-black tracking-tighter text-[var(--color-brand-green)]">K</span>
+                  <span className="text-[7px] font-black tracking-tighter text-[var(--color-brand-blue)]">R</span>
+                  <span className="text-[7px] font-black tracking-tighter text-[var(--color-brand-darkblue)]">E</span>
+                  <span className="text-[7px] font-black tracking-tighter text-[var(--color-brand-orange)]">N</span>
+                  <span className="text-[7px] font-black tracking-tighter text-[var(--color-brand-purple)]">K</span>
+                  <span className="text-[7px] font-black tracking-tighter text-[var(--color-brand-pink)]">E</span>
+                </div>
+                <span className="text-[5px] font-black text-slate-500 uppercase leading-none mt-0.5">OFFICIAL</span>
+              </div>
+           </div>
         </div>
-        <span className="text-[12px] font-black tracking-[0.25em] text-slate-600 uppercase mt-1 pl-1">Playgrounds</span>
-        <span className="text-[9px] font-bold tracking-[0.15em] text-slate-400 uppercase mt-0.5">De Pernambuco</span>
-      </div>
-      <div className={`flex flex-col items-center mt-2 transition-colors duration-300 ${isDarkBg ? 'text-white' : 'text-slate-800'}`}>
-        <span className="font-handwriting text-xl tracking-wide drop-shadow-sm text-center">o melhor jeito de brincar</span>
-        <div className={`flex items-center gap-2 opacity-90 ${isDarkBg ? 'text-white' : 'text-slate-600'}`}>
-            <span className="font-handwriting text-sm tracking-wider">por Silvio Romero Cavalcanti</span>
+
+        <div className={`font-black tracking-tight flex items-center leading-none transition-all duration-500 ${isScrolled ? 'text-2xl md:text-3xl' : 'text-5xl'}`}>
+          <span className="text-[var(--color-brand-green)]">P</span>
+          <span className="text-[var(--color-brand-orange)]">A</span>
+          <span className="text-[var(--color-brand-blue)]">L</span>
+          <span className="text-[var(--color-brand-purple)]">M</span>
+          <span className="text-[var(--color-brand-orange)]">A</span>
+          <span className="text-[var(--color-brand-darkblue)]">R</span>
+          <span className="text-[var(--color-brand-pink)]">E</span>
+          <span className="text-[var(--color-brand-green)]">S</span>
         </div>
+        
+        <div className={`flex items-center gap-3 w-full transition-all duration-500 ${isScrolled ? 'mt-1' : 'mt-3'}`}>
+          <div className="h-[2px] flex-1 bg-[var(--color-brand-green)] rounded-full"></div>
+          <span className={`font-black tracking-[0.25em] text-[var(--color-brand-blue)] uppercase transition-all duration-500 ${isScrolled ? 'text-[7px] md:text-[9px]' : 'text-[12px]'}`}>Playgrounds</span>
+          <div className="h-[2px] flex-1 bg-[var(--color-brand-green)] rounded-full"></div>
+        </div>
+        
+        {!isScrolled && (
+          <span className="text-[9px] font-bold text-slate-400 uppercase mt-3 text-center border-t border-slate-100 pt-2 w-full">Parques, playgrounds e soluções recreativas</span>
+        )}
       </div>
     </div>
   );
@@ -115,10 +147,10 @@ export default function App() {
   return (
     <div className="min-h-screen bg-[#F4F7FB] text-slate-900 font-sans selection:bg-[var(--color-brand-blue)] selection:text-white overflow-x-hidden">
       {/* Header */}
-      <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white/95 backdrop-blur-md shadow-sm py-2' : 'bg-transparent py-4'}`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-start md:items-center">
-          <a href="#" className="block">
-            <Logo isDarkBg={!isScrolled} />
+      <header className={`fixed top-0 w-full z-50 transition-all duration-500 ${isScrolled ? 'bg-white/95 backdrop-blur-md shadow-lg py-1 md:py-2' : 'bg-transparent py-4 md:py-6'}`}>
+        <div className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between transition-all duration-500 ${isScrolled ? 'items-center' : 'items-start md:items-center'}`}>
+          <a href="#" className="block transition-transform active:scale-95">
+            <Logo isDarkBg={!isScrolled} isScrolled={isScrolled} />
           </a>
 
           {/* Desktop Nav */}
@@ -133,8 +165,11 @@ export default function App() {
           </nav>
 
           {/* Mobile Menu Toggle */}
-          <button className="md:hidden text-slate-800 p-2 bg-white rounded-full shadow-sm mt-1" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
-            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          <button 
+            className={`md:hidden text-slate-800 p-2.5 bg-white rounded-full shadow-lg border border-slate-100 transition-all active:scale-90 ${isScrolled ? 'mt-0 scale-90' : 'mt-2'}`}
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            {isMobileMenuOpen ? <X className="w-6 h-6 text-red-500" /> : <Menu className="w-6 h-6 text-[var(--color-brand-blue)]" />}
           </button>
         </div>
 
@@ -157,7 +192,7 @@ export default function App() {
       </header>
 
       {/* Hero Section */}
-      <section className="relative pt-44 md:pt-48 pb-20 lg:pt-56 lg:pb-32 overflow-hidden">
+      <section className="relative pt-44 sm:pt-48 md:pt-56 pb-20 lg:pt-64 lg:pb-32 overflow-hidden">
         {/* Background Slider */}
         <div className="absolute inset-0 z-0 bg-slate-900">
           {HERO_IMAGES.map((img, idx) => (
@@ -167,7 +202,13 @@ export default function App() {
                 idx === heroCarouselIndex ? 'opacity-100' : 'opacity-0'
               }`}
             >
-              <img src={img} alt="Background" className="w-full h-full object-cover" />
+              <img 
+                src={img} 
+                alt="Background" 
+                className="w-full h-full object-cover" 
+                loading={idx === 0 ? "eager" : "lazy"}
+                fetchPriority={idx === 0 ? "high" : "auto"}
+              />
             </div>
           ))}
           {/* Dark Overlay for Text Readability - slightly stronger at top for logo/header */}
@@ -175,7 +216,7 @@ export default function App() {
         </div>
 
         {/* Decorative background blobs - tuned down to look good over dark bg */}
-        <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0 pointer-events-none opacity-50 mix-blend-screen">
+        <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0 pointer-events-none opacity-50 mix-blend-screen hidden md:block">
           <div className="absolute top-[-10%] left-[-5%] w-[40%] h-[40%] rounded-full bg-[var(--color-brand-blue)]/30 blur-[100px]"></div>
           <div className="absolute top-[10%] right-[-5%] w-[30%] h-[30%] rounded-full bg-[var(--color-brand-pink)]/30 blur-[100px]"></div>
           <div className="absolute bottom-[-10%] left-[20%] w-[50%] h-[50%] rounded-full bg-[var(--color-brand-orange)]/30 blur-[100px]"></div>
@@ -237,7 +278,7 @@ export default function App() {
                 Expertise em criar <span className="text-[var(--color-brand-orange)]">estruturas gigantes</span> e seguras.
               </h2>
               <p className="text-lg text-slate-600 mb-8 font-medium leading-relaxed">
-                Na Krenke Nordeste, não construímos apenas brinquedos; nós projetamos experiências imersivas. Nossa equipe trabalha em conjunto para garantir que cada projeto gigante seja visualmente deslumbrante e estruturalmente impecável.
+                Na Palmares Playgrounds, não construímos apenas brinquedos; nós projetamos experiências imersivas. Nossa equipe trabalha em conjunto para garantir que cada projeto gigante seja visualmente deslumbrante e estruturalmente impecável.
               </p>
               
               <div className="space-y-8">
@@ -271,6 +312,7 @@ export default function App() {
                   scrolling="no"
                   allowtransparency="true"
                   allow="encrypted-media"
+                  loading="lazy"
                 ></iframe>
                 <div className="absolute inset-0 border-4 border-[var(--color-brand-blue)]/20 rounded-[2.5rem] pointer-events-none"></div>
               </div>
@@ -379,7 +421,7 @@ export default function App() {
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="text-4xl md:text-5xl font-black text-[var(--color-brand-darkblue)] mb-6">Onde Estamos</h2>
             <p className="text-xl text-slate-600 font-medium">
-              Venha nos fazer uma visita e conhecer de perto a qualidade da Krenke Nordeste.
+              Venha nos fazer uma visita e conhecer de perto a qualidade da Palmares Playgrounds.
             </p>
           </div>
           <div className="w-full h-[450px] rounded-3xl overflow-hidden shadow-2xl border-8 border-slate-100">
@@ -390,6 +432,52 @@ export default function App() {
               loading="lazy" 
               referrerPolicy="no-referrer-when-downgrade"
             ></iframe>
+          </div>
+        </div>
+      </section>
+
+      {/* Trust & Leadership Section */}
+      <section className="py-20 bg-slate-50 border-y border-slate-100">
+        <div className="max-w-7xl mx-auto px-4 flex flex-col items-center">
+          <div className="flex flex-col md:flex-row items-center gap-8 md:gap-16">
+            {/* Authorized Partner Card */}
+            <div className="flex flex-col items-center text-center max-w-xs p-8 bg-white rounded-[2.5rem] shadow-xl border border-slate-100 hover:scale-105 transition-transform duration-300">
+              <div className="w-20 h-20 bg-[var(--color-brand-blue)]/10 rounded-3xl flex items-center justify-center mb-6 shadow-inner">
+                <ShieldCheck className="w-10 h-10 text-[var(--color-brand-blue)]" />
+              </div>
+              <h3 className="text-xl font-black text-slate-800 mb-2 uppercase tracking-tight">Parceria de Confiança</h3>
+              <p className="text-slate-500 font-medium text-sm mb-4 leading-relaxed">
+                Somos revendedores oficiais com certificação de excelência técnica.
+              </p>
+              <div className="px-5 py-2.5 rounded-full bg-gradient-to-r from-slate-50 to-slate-100 border border-slate-200">
+                <span className="text-[10px] font-black tracking-[0.2em] uppercase text-slate-500">Revenda Autorizada Krenke</span>
+              </div>
+            </div>
+
+            {/* Divider for Desktop */}
+            <div className="hidden md:block w-px h-32 bg-slate-200"></div>
+
+            {/* Executive Direction Card */}
+            <div className="flex flex-col items-center text-center max-w-xs p-8 bg-white rounded-[2.5rem] shadow-xl border border-slate-100 hover:scale-105 transition-transform duration-300">
+              <div className="w-20 h-20 bg-[var(--color-brand-pink)]/10 rounded-3xl flex items-center justify-center mb-6 shadow-inner">
+                <Plus className="w-10 h-10 text-[var(--color-brand-pink)]" />
+              </div>
+              <h3 className="text-xl font-black text-slate-800 mb-2 uppercase tracking-tight">Sílvio Romero Cavalcanti</h3>
+              <p className="text-slate-500 font-medium text-sm mb-4 leading-relaxed">
+                Mais de 30 anos transformando espaços em ambientes lúdicos de alto padrão.
+              </p>
+              <div className="px-5 py-2.5 rounded-full bg-gradient-to-r from-slate-50 to-slate-100 border border-slate-200">
+                <span className="text-[10px] font-black tracking-[0.2em] uppercase text-slate-500">Direção Executiva</span>
+              </div>
+            </div>
+          </div>
+          
+          <div className="mt-12 opacity-40 grayscale flex items-center gap-4">
+             <div className="flex gap-0.5 scale-75">
+                <Smile className="w-4 h-4 text-slate-800" />
+                <Smile className="w-4 h-4 text-slate-800" />
+              </div>
+              <span className="text-[10px] font-black tracking-[0.4em] uppercase text-slate-900 leading-none">Krenke Playgrounds</span>
           </div>
         </div>
       </section>
@@ -432,7 +520,7 @@ export default function App() {
           </div>
           
           <div className="border-t border-slate-800 mt-16 pt-8 text-center text-sm">
-            <p>&copy; {new Date().getFullYear()} Krenke Nordeste. Todos os direitos reservados.</p>
+            <p>&copy; {new Date().getFullYear()} Palmares Playgrounds. Todos os direitos reservados.</p>
           </div>
         </div>
       </footer>
