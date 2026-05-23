@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, Instagram, Facebook, Linkedin, MessageCircle, ChevronRight, ChevronLeft, ChevronDown, ShieldCheck, Wrench, Smile, Star, Plus, Palmtree } from 'lucide-react';
+import { Menu, X, Instagram, Facebook, Linkedin, MessageCircle, ChevronRight, ChevronLeft, ChevronDown, ShieldCheck, Wrench, Smile, Star, Plus, Palmtree, Search, Baby, Maximize2, Users, Check, Download, FileText } from 'lucide-react';
 import { motion } from 'motion/react';
+import { CATALOG_PRODUCTS, CATALOG_CATEGORIES, CatalogItem } from './catalogData';
 
 export default function App() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -8,6 +9,11 @@ export default function App() {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const [heroCarouselIndex, setHeroCarouselIndex] = useState(0);
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
+  
+  // Catalogue states
+  const [selectedCatalogCategory, setSelectedCatalogCategory] = useState<string>('all');
+  const [searchCatalogQuery, setSearchCatalogQuery] = useState<string>('');
+  const [selectedCatalogItem, setSelectedCatalogItem] = useState<CatalogItem | null>(null);
 
   const WHATSAPP_LINK = "https://wa.me/5581998312244";
   const INSTAGRAM_LINK = "https://www.instagram.com/krenkenordeste?igsh=MXM0em45azJpdGFmNA%3D%3D";
@@ -146,6 +152,65 @@ export default function App() {
     </div>
   );
 
+  const getCategoryColorClasses = (category: string) => {
+    switch (category) {
+      case 'Rotomoldados':
+        return {
+          bg: 'bg-emerald-50',
+          text: 'text-emerald-700',
+          border: 'border-emerald-200',
+          badge: 'bg-[var(--color-brand-green)]/10 text-[var(--color-brand-green)]',
+          accent: 'bg-[var(--color-brand-green)]'
+        };
+      case 'Little Play':
+        return {
+          bg: 'bg-pink-50',
+          text: 'text-pink-700',
+          border: 'border-pink-200',
+          badge: 'bg-[var(--color-brand-pink)]/10 text-[var(--color-brand-pink)]',
+          accent: 'bg-[var(--color-brand-pink)]'
+        };
+      case 'Temáticos':
+        return {
+          bg: 'bg-orange-50',
+          text: 'text-orange-700',
+          border: 'border-orange-200',
+          badge: 'bg-[var(--color-brand-orange)]/10 text-[var(--color-brand-orange)]',
+          accent: 'bg-[var(--color-brand-orange)]'
+        };
+      case 'Aquáticos':
+        return {
+          bg: 'bg-sky-50',
+          text: 'text-sky-700',
+          border: 'border-sky-200',
+          badge: 'bg-[var(--color-brand-blue)]/10 text-[var(--color-brand-blue)]',
+          accent: 'bg-[var(--color-brand-blue)]'
+        };
+      default:
+        return {
+          bg: 'bg-slate-50',
+          text: 'text-slate-700',
+          border: 'border-slate-200',
+          badge: 'bg-slate-100 text-slate-700',
+          accent: 'bg-slate-500'
+        };
+    }
+  };
+
+  const filteredCatalogProducts = CATALOG_PRODUCTS.filter((product) => {
+    const matchesCategory = selectedCatalogCategory === 'all' || product.category === selectedCatalogCategory;
+    const query = searchCatalogQuery.toLowerCase().trim();
+    if (!query) return matchesCategory;
+
+    const matchesName = product.name.toLowerCase().includes(query);
+    const matchesId = product.id.toLowerCase().includes(query);
+    const matchesDesc = product.description.toLowerCase().includes(query);
+    const matchesAge = product.ageRange.toLowerCase().includes(query);
+    const matchesHighlights = product.highlights.some(h => h.toLowerCase().includes(query));
+
+    return matchesCategory && (matchesName || matchesId || matchesDesc || matchesAge || matchesHighlights);
+  });
+
   return (
     <div className="min-h-screen bg-[#F4F7FB] text-slate-900 font-sans selection:bg-[var(--color-brand-blue)] selection:text-white overflow-x-hidden">
       {/* Header */}
@@ -158,7 +223,8 @@ export default function App() {
           {/* Desktop Nav */}
           <nav className={`hidden md:flex items-center gap-8 font-bold transition-colors duration-300 ${!isScrolled ? 'text-white/90 drop-shadow-md' : 'text-slate-600'}`}>
             <a href="#conheca-nos" className={`transition-colors ${!isScrolled ? 'hover:text-white' : 'hover:text-[var(--color-brand-pink)]'}`}>Conheça-nos</a>
-            <a href="#produtos" className={`transition-colors ${!isScrolled ? 'hover:text-white' : 'hover:text-[var(--color-brand-blue)]'}`}>Produtos</a>
+            <a href="#produtos" className={`transition-colors ${!isScrolled ? 'hover:text-white' : 'hover:text-[var(--color-brand-blue)]'}`}>Projetos</a>
+            <a href="#catalogo" className={`transition-colors ${!isScrolled ? 'hover:text-white' : 'hover:text-[var(--color-brand-green)]'}`}>Catálogo 2026</a>
             <a href="#contato" className={`transition-colors ${!isScrolled ? 'hover:text-white' : 'hover:text-[var(--color-brand-orange)]'}`}>Contato</a>
             <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" className="bg-[var(--color-brand-green)] hover:bg-[#008f45] text-white px-6 py-3 rounded-full shadow-lg transition-all hover:-translate-y-1 active:translate-y-0 flex items-center gap-2">
               <MessageCircle className="w-5 h-5" />
@@ -183,7 +249,8 @@ export default function App() {
             className="md:hidden absolute top-full left-0 w-full bg-white shadow-xl py-6 px-6 flex flex-col gap-6 font-bold text-slate-600 border-t border-slate-100"
           >
             <a href="#conheca-nos" onClick={() => setIsMobileMenuOpen(false)} className="block text-lg hover:text-[var(--color-brand-pink)]">Conheça-nos</a>
-            <a href="#produtos" onClick={() => setIsMobileMenuOpen(false)} className="block text-lg hover:text-[var(--color-brand-blue)]">Produtos</a>
+            <a href="#produtos" onClick={() => setIsMobileMenuOpen(false)} className="block text-lg hover:text-[var(--color-brand-blue)]">Projetos</a>
+            <a href="#catalogo" onClick={() => setIsMobileMenuOpen(false)} className="block text-lg hover:text-[var(--color-brand-green)]">Catálogo 2026</a>
             <a href="#contato" onClick={() => setIsMobileMenuOpen(false)} className="block text-lg hover:text-[var(--color-brand-orange)]">Contato</a>
             <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" className="bg-[var(--color-brand-green)] text-white px-6 py-4 rounded-2xl text-center shadow-lg flex items-center justify-center gap-2 text-lg">
               <MessageCircle className="w-6 h-6" />
@@ -359,6 +426,360 @@ export default function App() {
           </div>
         </div>
       </section>
+
+      {/* Catalogue Section */}
+      <section id="catalogo" className="py-24 bg-[#FAFBFD] relative overflow-hidden border-y border-slate-100">
+        {/* Dynamic header brand banner element */}
+        <div className="absolute top-0 left-0 w-full h-[6px] bg-gradient-to-r from-[var(--color-brand-green)] via-[var(--color-brand-blue)] to-[var(--color-brand-pink)]"></div>
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[var(--color-brand-orange)]/10 text-[var(--color-brand-orange)] text-xs font-black uppercase tracking-wider mb-4 border border-[var(--color-brand-orange)]/20 shadow-sm">
+              <Star className="w-3.5 h-3.5 fill-[var(--color-brand-orange)]" /> Catálogo Oficial Krenke 2026
+            </span>
+            <h2 className="text-4xl md:text-5xl font-black text-[var(--color-brand-darkblue)] mb-6">
+              Brincando No Mundo Real
+            </h2>
+            <p className="text-lg md:text-xl text-slate-600 font-medium">
+              Consulte todas as especificações técnicas, áreas de segurança exigidas pelas normas da ABNT e capacidades de cada equipamento Krenke. Clique no brinquedo para cotar no WhatsApp.
+            </p>
+
+            {/* Premium Download Catalogue Action Area */}
+            <div className="mt-8 flex items-center justify-center">
+              <a
+                href={`${WHATSAPP_LINK}?text=${encodeURIComponent("Olá Sílvio Cavalcanti! Gostaria de receber o PDF completo em alta definição do Catálogo Oficial Krenke Playgrounds 2026 para analisar as opções!")}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2.5 px-8 py-4 bg-[var(--color-brand-green)] hover:bg-[#008f45] text-white text-sm font-black uppercase tracking-wider rounded-2xl shadow-lg transition-all duration-300 hover:scale-[1.03] active:scale-[0.98]"
+              >
+                <Download className="w-4 h-4 shrink-0 animate-bounce" /> Solicitar PDF do Catálogo Completo (WhatsApp)
+              </a>
+            </div>
+          </div>
+
+          {/* Search & Categories Combo Box */}
+          <div className="bg-white p-6 rounded-3xl shadow-xl border border-slate-100 max-w-5xl mx-auto mb-12 flex flex-col gap-6">
+            {/* Search Input field */}
+            <div className="relative">
+              <span className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                <Search className="h-5 w-5 text-slate-400" />
+              </span>
+              <input
+                type="text"
+                value={searchCatalogQuery}
+                onChange={(e) => setSearchCatalogQuery(e.target.value)}
+                placeholder="Busque por código (ex: KMP 0101, KLP), faixa etária, ou palavra-chave..."
+                className="block w-full pl-12 pr-4 py-4 rounded-2xl bg-slate-50 border-2 border-slate-100 text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[var(--color-brand-blue)] focus:bg-white text-lg font-medium transition-all"
+              />
+              {searchCatalogQuery && (
+                <button
+                  type="button"
+                  onClick={() => setSearchCatalogQuery('')}
+                  className="absolute inset-y-0 right-0 pr-4 flex items-center text-slate-400 hover:text-red-500 font-bold"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              )}
+            </div>
+
+            {/* Category selections */}
+            <div>
+              <span className="text-xs font-black text-slate-400 uppercase tracking-widest block mb-3">
+                Filtrar por Linha de Equipamento:
+              </span>
+              <div className="flex flex-wrap gap-2.5">
+                {CATALOG_CATEGORIES.map((cat) => {
+                  const isActive = selectedCatalogCategory === cat.id;
+                  let ColorStyle = '';
+
+                  switch (cat.id) {
+                    case 'all':
+                      ColorStyle = isActive 
+                        ? 'bg-slate-800 text-white shadow-md' 
+                        : 'bg-slate-50 text-slate-600 hover:bg-slate-100';
+                      break;
+                    case 'Rotomoldados':
+                      ColorStyle = isActive 
+                        ? 'bg-[var(--color-brand-green)] text-white shadow-[0_4px_12px_rgba(0,186,104,0.3)]' 
+                        : 'bg-emerald-50 text-emerald-700 hover:bg-emerald-100';
+                      break;
+                    case 'Little Play':
+                      ColorStyle = isActive 
+                        ? 'bg-[var(--color-brand-pink)] text-white shadow-[0_4px_12px_rgba(236,0,140,0.3)]' 
+                        : 'bg-pink-50 text-pink-700 hover:bg-pink-100';
+                      break;
+                    case 'Temáticos':
+                      ColorStyle = isActive 
+                        ? 'bg-[var(--color-brand-orange)] text-white shadow-[0_4px_12px_rgba(242,101,34,0.3)]' 
+                        : 'bg-orange-50 text-orange-700 hover:bg-orange-100';
+                      break;
+                    case 'Aquáticos':
+                      ColorStyle = isActive 
+                        ? 'bg-[var(--color-brand-blue)] text-white shadow-[0_4px_12px_rgba(0,174,239,0.3)]' 
+                        : 'bg-sky-50 text-sky-700 hover:bg-sky-100';
+                      break;
+                  }
+
+                  return (
+                    <button
+                      key={cat.id}
+                      type="button"
+                      onClick={() => setSelectedCatalogCategory(cat.id)}
+                      className={`px-5 py-2.5 rounded-xl font-bold text-sm transition-all active:scale-95 duration-200 border border-transparent whitespace-nowrap ${ColorStyle}`}
+                    >
+                      {cat.name}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+
+          {/* Category description explanation banner */}
+          {selectedCatalogCategory !== 'all' && (
+            <div className="max-w-5xl mx-auto mb-8 p-5 rounded-2xl bg-slate-50 border border-slate-100 text-slate-600 font-medium text-sm flex items-center gap-3">
+              <span className="w-2.5 h-2.5 rounded-full shrink-0 bg-[var(--color-brand-orange)]"></span>
+              <span>
+                {CATALOG_CATEGORIES.find(c => c.id === selectedCatalogCategory)?.description}
+              </span>
+            </div>
+          )}
+
+          {/* Grid products display */}
+          {filteredCatalogProducts.length === 0 ? (
+            <div className="text-center py-16 bg-white rounded-3xl border border-slate-100 p-8 max-w-xl mx-auto shadow-md">
+              <Search className="w-12 h-12 text-slate-300 mx-auto mb-4" />
+              <h3 className="text-xl font-black text-slate-700 mb-2">Nenhum brinquedo encontrado</h3>
+              <p className="text-slate-500 font-medium">Tente ajustar a sua busca ou limpar os filtros para visualizar outras opções sofisticadas.</p>
+              <button
+                type="button"
+                onClick={() => { setSearchCatalogQuery(''); setSelectedCatalogCategory('all'); }}
+                className="mt-6 font-bold text-sm bg-slate-800 text-white px-5 py-2.5 rounded-xl transition hover:bg-slate-700"
+              >
+                Resetar Filtros
+              </button>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+              {filteredCatalogProducts.map((product) => {
+                const colors = getCategoryColorClasses(product.category);
+                return (
+                  <div
+                    key={product.id}
+                    className="bg-white rounded-[2rem] border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col group hover:-translate-y-1.5"
+                  >
+                    {/* Upper illustration segment */}
+                    <div className="relative aspect-[4/3] bg-gradient-to-br from-slate-50 to-slate-100 flex items-center justify-center p-3 overflow-hidden">
+                      {/* Accent colors on frame */}
+                      <div className={`absolute top-0 left-0 w-full h-[5px] ${colors.accent}`}></div>
+                      
+                      {/* Line Tag Badge */}
+                      <span className={`absolute top-4 left-4 text-[10px] font-black uppercase tracking-wider px-3 py-1 rounded-full ${colors.badge} border border-current/10 z-10 shadow-sm`}>
+                        {product.category}
+                      </span>
+
+                      {/* Display image fallback nicely in referrers */}
+                      <img
+                        src={product.imageUrl}
+                        alt={product.name}
+                        referrerPolicy="no-referrer"
+                        className="w-full h-full object-cover rounded-2xl group-hover:scale-105 transition-all duration-500 shadow-sm"
+                        onError={(e) => {
+                          e.currentTarget.src = "https://images.unsplash.com/photo-1544816155-12df9643f363?q=80&w=600&auto=format&fit=crop";
+                        }}
+                      />
+                    </div>
+
+                    {/* Metadata attributes section */}
+                    <div className="p-6 flex-1 flex flex-col justify-between">
+                      <div>
+                        <div className="flex items-center gap-2 mb-2">
+                          <span className="font-mono text-[10px] font-black text-slate-400 bg-slate-50 border border-slate-200 px-2 py-0.5 rounded">
+                            {product.id}
+                          </span>
+                        </div>
+                        <h3 className="text-lg font-black text-slate-800 group-hover:text-[var(--color-brand-blue)] transition-colors line-clamp-1 mb-2">
+                          {product.name}
+                        </h3>
+                        <p className="text-slate-500 text-xs font-medium line-clamp-2 leading-relaxed mb-4">
+                          {product.description}
+                        </p>
+                      </div>
+
+                      {/* Mini spec table block */}
+                      <div className="space-y-2 border-t border-slate-100 pt-4">
+                        <div className="flex items-center justify-between text-xs font-bold text-slate-600">
+                          <span className="flex items-center gap-1.5 text-slate-400"><Baby className="w-3.5 h-3.5" /> Faixa Etária</span>
+                          <span>{product.ageRange}</span>
+                        </div>
+                        <div className="flex items-center justify-between text-xs font-bold text-slate-600">
+                          <span className="flex items-center gap-1.5 text-slate-400"><Users className="w-3.5 h-3.5" /> Capacidade</span>
+                          <span>{product.capacity}</span>
+                        </div>
+                        <div className="flex items-center justify-between text-xs font-bold text-slate-600">
+                          <span className="flex items-center gap-1.5 text-slate-400"><ShieldCheck className="w-3.5 h-3.5" /> Área Mínima</span>
+                          <span className="font-mono text-[10px] font-black text-slate-700 bg-slate-50 px-1.5 py-0.5 rounded border border-slate-100">{product.minArea}</span>
+                        </div>
+                      </div>
+
+                      {/* Detail action */}
+                      <div className="mt-5">
+                        <button
+                          type="button"
+                          onClick={() => setSelectedCatalogItem(product)}
+                          className="w-full bg-slate-50 hover:bg-slate-100 text-slate-700 py-3 rounded-2xl font-bold text-xs flex items-center justify-center gap-1.5 transition-all shadow-sm group/btn border border-slate-100"
+                        >
+                          Ver Ficha Técnica
+                          <Maximize2 className="w-3 h-3 text-slate-400 group-hover/btn:scale-110 transition-transform" />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* Product Detail Modal Overlay Dialog */}
+      {selectedCatalogItem !== null && (
+        <div 
+          className="fixed inset-0 z-[110] bg-slate-950/85 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto"
+          onClick={() => setSelectedCatalogItem(null)}
+        >
+          <div 
+            className="relative bg-white rounded-[2.5rem] w-full max-w-2xl overflow-hidden shadow-2xl border border-slate-100 my-8 scale-100 transition-all duration-300"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Header decorator line */}
+            <div className={`h-2.5 w-full ${getCategoryColorClasses(selectedCatalogItem.category).accent}`}></div>
+
+            {/* Close trigger button */}
+            <button 
+              type="button"
+              onClick={() => setSelectedCatalogItem(null)}
+              className="absolute top-6 right-6 text-slate-400 hover:text-red-500 transition-all bg-slate-100 hover:bg-slate-200 p-2 rounded-full z-10"
+              aria-label="Minimizar"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            <div className="p-6 md:p-8">
+              <div className="grid md:grid-cols-5 gap-8 items-start">
+                
+                {/* Left image and identification code tags */}
+                <div className="md:col-span-2 space-y-4">
+                  <div className="aspect-square bg-slate-50 rounded-2xl border border-slate-100 flex items-center justify-center p-2 relative overflow-hidden shadow-sm">
+                    <img 
+                      src={selectedCatalogItem.imageUrl} 
+                      alt={selectedCatalogItem.name} 
+                      referrerPolicy="no-referrer"
+                      className="w-full h-full object-cover rounded-xl shadow-sm"
+                      onError={(e) => {
+                        e.currentTarget.src = "https://images.unsplash.com/photo-1544816155-12df9643f363?q=80&w=600&auto=format&fit=crop";
+                      }}
+                    />
+                  </div>
+                  
+                  <div className="flex flex-col gap-1 text-center bg-slate-50 rounded-xl p-3 border border-slate-100 shadow-sm">
+                    <span className="text-[9px] font-black tracking-widest text-slate-400 uppercase">
+                      Modelo Oficial Krenke
+                    </span>
+                    <span className="font-mono font-extrabold text-slate-800 text-sm">
+                      Ref: {selectedCatalogItem.id}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Right detailed table and spec definitions */}
+                <div className="md:col-span-3 space-y-5">
+                  <div>
+                    <span className={`inline-block text-[9px] font-black uppercase tracking-wider px-3 py-1.5 rounded-full mb-2 ${getCategoryColorClasses(selectedCatalogItem.category).badge}`}>
+                      Linha {selectedCatalogItem.category}
+                    </span>
+                    <h3 className="text-2xl font-black text-slate-800">
+                      {selectedCatalogItem.name}
+                    </h3>
+                  </div>
+
+                  <p className="text-slate-600 text-xs leading-relaxed font-semibold">
+                    {selectedCatalogItem.description}
+                  </p>
+
+                  {/* Complete specifications table card context */}
+                  <div className="bg-slate-50 rounded-2xl border border-slate-100 p-4 space-y-3 shadow-inner">
+                    <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
+                      Especificações de Segurança (ABNT):
+                    </h4>
+                    
+                    <div className="grid grid-cols-2 gap-2 text-xs font-bold text-slate-600">
+                      <div className="p-2.5 bg-white rounded-xl border border-slate-100 flex flex-col gap-0.5">
+                        <span className="text-[9px] text-slate-400 uppercase">Faixa Etária</span>
+                        <span className="font-extrabold text-slate-800 flex items-center gap-1"><Baby className="w-3.5 h-3.5 text-amber-500" /> {selectedCatalogItem.ageRange}</span>
+                      </div>
+                      
+                      <div className="p-2.5 bg-white rounded-xl border border-slate-100 flex flex-col gap-0.5">
+                        <span className="text-[9px] text-slate-400 uppercase">Capacidade</span>
+                        <span className="font-extrabold text-slate-800 flex items-center gap-1"><Users className="w-3.5 h-3.5 text-blue-500" /> {selectedCatalogItem.capacity}</span>
+                      </div>
+
+                      <div className="p-2.5 bg-white rounded-xl border border-slate-100 flex flex-col gap-0.5">
+                        <span className="text-[9px] text-slate-400 uppercase">Área do Piso</span>
+                        <span className="font-mono font-extrabold text-slate-800 text-[10px] bg-slate-50 px-1.5 py-0.5 rounded self-start mt-0.5 border border-slate-100">{selectedCatalogItem.minArea}</span>
+                      </div>
+
+                      <div className="p-2.5 bg-white rounded-xl border border-slate-100 flex flex-col gap-0.5">
+                        <span className="text-[9px] text-slate-400 uppercase">Área de Segurança</span>
+                        <span className="font-mono font-extrabold text-slate-800 text-[10px] bg-slate-50 px-1.5 py-0.5 rounded self-start mt-0.5 border border-slate-100">{selectedCatalogItem.safetyArea}</span>
+                      </div>
+                    </div>
+                    
+                    <div className="p-2.5 bg-white rounded-xl border border-slate-100 flex items-center justify-between text-xs font-semibold">
+                      <span className="text-slate-400 uppercase text-[9px]">Dimensões Gerais</span>
+                      <span className="font-mono font-extrabold text-slate-800 bg-slate-50 px-2 py-0.5 rounded border border-slate-100">{selectedCatalogItem.dimensions}</span>
+                    </div>
+                  </div>
+
+                  {/* Highlights checklist */}
+                  <div className="space-y-1.5">
+                    <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
+                      Diferenciais Técnicos:
+                    </h4>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px] font-bold text-slate-600">
+                      {selectedCatalogItem.highlights.map((highlight, hIdx) => (
+                        <div key={hIdx} className="flex items-center gap-1.5">
+                          <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0 bg-emerald-50 border border-emerald-100 rounded-full p-0.5" />
+                          <span>{highlight}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Direct Contact Button dispatch info */}
+                  <div className="pt-2 flex flex-col gap-2">
+                    <a 
+                      href={`${WHATSAPP_LINK}?text=${encodeURIComponent(selectedCatalogItem.whatsappMessage)}`}
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="w-full bg-[var(--color-brand-green)] hover:bg-[#008f45] text-white py-4 px-6 rounded-2xl font-black text-sm flex items-center justify-center gap-2 shadow-lg transition-all text-center hover:scale-[1.02]"
+                    >
+                      <MessageCircle className="w-5 h-5" />
+                      Solicitar Orçamento no WhatsApp
+                    </a>
+                    
+                    <span className="text-[9px] font-bold text-slate-400 uppercase tracking-wider block text-center mt-1">
+                      Falar diretamente com Sílvio Cavalcanti
+                    </span>
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* FAQ Section */}
       <section className="py-24 bg-white relative">
